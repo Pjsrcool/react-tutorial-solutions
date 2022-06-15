@@ -1,73 +1,132 @@
-import React from "react";
-import Square from "./Square";
-import "../index.css";
+"use strict";
 
-class Board extends React.Component {
-  highlightSquares = i => {
-    if (this.props.winningSquares.length > 0) {
-      if (this.props.winningSquares.indexOf(i) > -1) {
-        return "square winningSquares";
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _Square = _interopRequireDefault(require("./Square"));
+
+require("../index.css");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Board = /*#__PURE__*/function (_React$Component) {
+  _inherits(Board, _React$Component);
+
+  var _super = _createSuper(Board);
+
+  function Board() {
+    var _this;
+
+    _classCallCheck(this, Board);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "highlightSquares", function (i) {
+      if (_this.props.winningSquares.length > 0) {
+        if (_this.props.winningSquares.indexOf(i) > -1) {
+          return "square winningSquares";
+        } else {
+          return "square";
+        }
       } else {
         return "square";
       }
-    } else {
-      return "square";
-    }
-  };
+    });
 
-  renderSquare(i) {
-    let highlight = this.highlightSquares(i);
-    return (
-      <Square
-        key={i}
-        highlightWinSquares={highlight}
-        value={this.props.squares[i]}
-        updateStateOnClick={() => this.props.onClick(i)}
-      />
-    );
-  }
+    _defineProperty(_assertThisInitialized(_this), "generateRow", function (index, max) {
+      var rows = [];
 
-  generateRow = (index, max) => {
-    let rows = [];
-
-    for (index; index < max; index++) {
-      rows.push(this.renderSquare(index));
-    }
-    return rows;
-  };
-
-  generateBoard = (columns, rows) => {
-    let board = [];
-
-    /**
-     * Generate (col * row, here, 3 * 3 = 9) squares
-     */
-    for (let i = 0; i < columns * rows; i++) {
-      /**
-       * Generate columns.
-       *
-       * Only allow multiples of "number of columns".
-       * For example, if number of columns is 3, then,
-       * 3, 6, 9.
-       */
-      if (i % columns === 0) {
-        board.push(
-          <div className="board-row" key={i}>
-            {this.generateRow(i, i + columns)}
-          </div>
-        );
+      for (index; index < max; index++) {
+        rows.push(_this.renderSquare(index));
       }
-    }
-    return board;
-  };
 
-  render() {
-    return (
-      <div>
-        <div>{this.generateBoard(3, 3)}</div>
-      </div>
-    );
+      return rows;
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "generateBoard", function (columns, rows) {
+      var board = [];
+      /**
+       * Generate (col * row, here, 3 * 3 = 9) squares
+       */
+
+      for (var i = 0; i < columns * rows; i++) {
+        /**
+         * Generate columns.
+         *
+         * Only allow multiples of "number of columns".
+         * For example, if number of columns is 3, then,
+         * 3, 6, 9.
+         */
+        if (i % columns === 0) {
+          board.push( /*#__PURE__*/_react.default.createElement("div", {
+            className: "board-row",
+            key: i
+          }, _this.generateRow(i, i + columns)));
+        }
+      }
+
+      return board;
+    });
+
+    return _this;
   }
-}
 
-export default Board;
+  _createClass(Board, [{
+    key: "renderSquare",
+    value: function renderSquare(i) {
+      var _this2 = this;
+
+      var highlight = this.highlightSquares(i);
+      return /*#__PURE__*/_react.default.createElement(_Square.default, {
+        key: i,
+        highlightWinSquares: highlight,
+        value: this.props.squares[i],
+        updateStateOnClick: function updateStateOnClick() {
+          return _this2.props.onClick(i);
+        }
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, this.generateBoard(3, 3)));
+    }
+  }]);
+
+  return Board;
+}(_react.default.Component);
+
+var _default = Board;
+exports.default = _default;

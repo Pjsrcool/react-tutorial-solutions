@@ -1,14 +1,20 @@
-import React from "react";
+"use strict";
 
-const Square = props => {
-  return (
-    <button
-      className={props.highlightWinSquares}
-      onClick={props.updateStateOnClick}
-    >
-      {props.value}
-    </button>
-  );
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Square = function Square(props) {
+  return /*#__PURE__*/_react.default.createElement("button", {
+    className: props.highlightWinSquares,
+    onClick: props.updateStateOnClick
+  }, props.value);
 };
 
-export default Square;
+var _default = Square;
+exports.default = _default;
